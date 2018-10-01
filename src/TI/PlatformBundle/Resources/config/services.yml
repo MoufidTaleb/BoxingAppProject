@@ -1,0 +1,4 @@
+services:
+#    ti_platform.example:
+#        class: TI\PlatformBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
