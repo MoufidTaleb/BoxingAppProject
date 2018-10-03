@@ -1,5 +1,25 @@
 {% extends "TIPlatformBundle::layout.html.twig" %}
-
+{% block title %}
+    Vue de l'annonce - {{ parent() }}
+{% endblock %}
 {% block PlatformBody %}
-    Voir une annonce
+    <h2>Affichage de l'annonce</h2>
+
+    {% for message in app.session.flashbag.get('info') %}
+        <p> {{ message }}</p>
+    {% endfor %}
+
+    <h2> {{ advert.title }} </h2>
+    Auteur: {{ advert.author }} <br/>
+    Localisation: {{ advert.location }} <br/>
+    <div class="well"> {{ advert.content }} </div>
+
+    <p>
+        <a href="{{ path('ti_platform_edit', {'id': advert.id }) }}" class="btn btn-default">
+            Modifier l'annonce
+        </a>
+        <a href="{{ path('ti_platform_delete', { 'id' : advert.id }) }}" class="btn btn-danger">
+            Supprimer l'annonce
+        </a>
+    </p>
 {% endblock %}

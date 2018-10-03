@@ -1,5 +1,25 @@
-{%  extends "TIPlatformBundle::layout.html.twig" %}
+{% extends "TIPlatformBundle::layout.html.twig" %}
 
-{%  block PlatformBody %}
-    Index
+{% block title %}
+    Accueil - {{ parent() }}
+{% endblock %}
+
+{% block PlatformBody %}
+
+    {% for message in app.session.flashbag.get('info') %}
+        <p> {{ message }}</p>
+    {% endfor %}
+
+    <h2>Liste des annonces</h2>
+    <ul>
+        {% for advert in listAdverts %}
+            <li>
+                <a href="{{ path('ti_platform_view', {'id': advert.id}) }} "> {{ advert.title }}</a>
+                par <i>{{ advert.author }}</i> le {{ advert.date|date('d/m/Y') }}
+            </li>
+
+        {% else %}
+            Pas encore d'annonces!
+        {% endfor %}
+    </ul>
 {% endblock %}
