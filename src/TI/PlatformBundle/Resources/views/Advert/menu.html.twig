@@ -1,1 +1,9 @@
-<p>Menu à implémenter</p>
+<ul class="nav nav-pills nav-stacked">
+    {% for advert in listAdverts %}
+        <li>
+        <a href="{{ path('ti_platform_view', { 'id': advert.id }) }}">
+            {{ advert.title }}
+        </a>
+        </li>
+    {% endfor %}
+</ul>

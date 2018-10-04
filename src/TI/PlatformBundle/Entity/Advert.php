@@ -12,6 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Advert
 {
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
     /**
      * @var int
      *
