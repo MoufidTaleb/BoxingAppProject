@@ -2,6 +2,8 @@
 
 namespace TI\PlatformBundle\Repository;
 
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
 /**
  * AdvertRepository
  *
@@ -10,4 +12,16 @@ namespace TI\PlatformBundle\Repository;
  */
 class AdvertRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getAdverts($page, $nbPerPage) //With a paginator
+    {
+    $query = $this->createQueryBuilder('a')
+        ->orderBy('a.date', 'DESC')
+        ->getQuery();
+
+    $query
+        ->setFirstResult(($page-1) * $nbPerPage)
+        ->setMaxResults($nbPerPage);
+
+    return new Paginator($query, false);
+    }
 }

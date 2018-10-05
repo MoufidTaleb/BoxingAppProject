@@ -6,18 +6,35 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use TI\PlatformBundle\Entity\Advert;
+use TI\PlatformBundle\Form\AdvertEditType;
 use TI\PlatformBundle\Form\AdvertType;
 
 class AdvertController extends Controller
 {
     public function indexAction($page)
     {
-        $em = $this->getDoctrine()->getManager();
+        if ($page == null) {
+            $page = 1;
+        }
+        if ($page < 1) {
+            throw $this->createNotFoundException("La page " . $page . " n'existe pas.");
+        }
 
-        $listAdverts = $em->getRepository('TIPlatformBundle:Advert')->findAll();
+        $nbPerPage = 5;
+
+        $listAdverts = $this->getDoctrine()->getManager()
+            ->getRepository('TIPlatformBundle:Advert')->getAdverts($page, $nbPerPage);
+
+        $nbPages = ceil(count($listAdverts) / $nbPerPage);
+
+        if ($page > $nbPages) {
+            $this->createNotFoundException("La page " . $page . " n'existe pas!");
+        }
 
         return $this->render('TIPlatformBundle:Advert:index.html.twig', array(
             'listAdverts' => $listAdverts,
+            'nbPages' => $nbPages,
+            'page' => $page,
         ));
     }
 
@@ -60,7 +77,7 @@ class AdvertController extends Controller
         if (null === $advert) {
             throw new NotFoundHttpException("L'annonce d'id " . $id . " n'existe pas!");
         }
-        $form = $this->createForm(AdvertType::class, $advert);
+        $form = $this->createForm(AdvertEditType::class, $advert);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             $em = $this->getDoctrine()->getManager();
