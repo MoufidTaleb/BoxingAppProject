@@ -24,4 +24,21 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
 
     return new Paginator($query, false);
     }
+
+    public function getAdvertWithAllStuff($id)
+    {
+    $qb = $this->createQueryBuilder('a')
+        ->where('a.id = :id')
+        ->setParameter('id', $id)
+        ->leftJoin('a.applications', 'app')
+        ->addSelect('app')
+        ->leftJoin('a.weightCategories', 'wc')
+        ->addSelect('wc')
+        ->orderBy('a.date', 'DESC')
+        ;
+    return $qb
+        ->getQuery()
+        ->getSingleResult()
+        ;
+    }
 }

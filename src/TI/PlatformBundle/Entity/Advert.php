@@ -2,6 +2,7 @@
 
 namespace TI\PlatformBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,7 +16,9 @@ class Advert
     public function __construct()
     {
         $this->date = new \DateTime();
+        $this->weightCategories = new ArrayCollection();
     }
+
     /**
      * @var int
      *
@@ -24,6 +27,11 @@ class Advert
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @ORM\OneToMany(targetEntity="TI\PlatformBundle\Entity\Application", mappedBy="advert")
+     */
+    private $applications;
 
     /**
      * @var \DateTime
@@ -66,6 +74,16 @@ class Advert
      * @ORM\Column(name="email", type="string", length=255, unique=false)
      */
     private $email;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="TI\PlatformBundle\Entity\WeightCategory", cascade={"persist"})
+     */
+    private $weightCategories;
+
+
+    //______________________________________________Getters & Setters
+
+
 
 
     /**
@@ -220,5 +238,73 @@ class Advert
     public function getLocation()
     {
         return $this->location;
+    }
+
+    /**
+     * Add application
+     *
+     * @param \TI\PlatformBundle\Entity\Application $application
+     *
+     * @return Advert
+     */
+    public function addApplication(\TI\PlatformBundle\Entity\Application $application)
+    {
+        $this->applications[] = $application;
+        $application->setAdvert($this);
+        return $this;
+    }
+
+    /**
+     * Remove application
+     *
+     * @param \TI\PlatformBundle\Entity\Application $application
+     */
+    public function removeApplication(\TI\PlatformBundle\Entity\Application $application)
+    {
+        $this->applications->removeElement($application);
+    }
+
+    /**
+     * Get applications
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getApplications()
+    {
+        return $this->applications;
+    }
+
+    /**
+     * Add weightCategory
+     *
+     * @param \TI\PlatformBundle\Entity\WeightCategory $weightCategory
+     *
+     * @return Advert
+     */
+    public function addWeightCategory(\TI\PlatformBundle\Entity\WeightCategory $weightCategory)
+    {
+        $this->weightCategories[] = $weightCategory;
+
+        return $this;
+    }
+
+    /**
+     * Remove weightCategory
+     *
+     * @param \TI\PlatformBundle\Entity\WeightCategory $weightCategory
+     */
+    public function removeWeightCategory(\TI\PlatformBundle\Entity\WeightCategory $weightCategory)
+    {
+        $this->weightCategories->removeElement($weightCategory);
+    }
+
+    /**
+     * Get weightCategories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getWeightCategories()
+    {
+        return $this->weightCategories;
     }
 }

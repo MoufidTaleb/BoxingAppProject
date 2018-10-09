@@ -2,6 +2,7 @@
 
 namespace TI\PlatformBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,7 +24,13 @@ class AdvertType extends AbstractType
             ->add('author', TextType::class)
             ->add('content', TextareaType::class)
             ->add('email', EmailType::class)
-            ->add('save', SubmitType::class);
+            ->add('weightCategories', EntityType::class, array(
+                'class' => 'TIPlatformBundle:WeightCategory',
+                'choice_label' => 'name',
+                'multiple' => true,
+            ))
+            ->add('save', SubmitType::class)
+        ;
     }
     
     /**

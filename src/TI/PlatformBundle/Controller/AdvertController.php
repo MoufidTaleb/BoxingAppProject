@@ -6,8 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use TI\PlatformBundle\Entity\Advert;
+use TI\PlatformBundle\Entity\Application;
 use TI\PlatformBundle\Form\AdvertEditType;
 use TI\PlatformBundle\Form\AdvertType;
+use TI\PlatformBundle\Form\ApplicationType;
 
 class AdvertController extends Controller
 {
@@ -38,16 +40,34 @@ class AdvertController extends Controller
         ));
     }
 
-    public function viewAction($id)
+    public function viewAction(Request $request, $id)
     {
         $repository = $this->getDoctrine()->getManager()->getRepository('TIPlatformBundle:Advert');
-        $advert = $repository->find($id);
+        $advert = $repository->getAdvertWithAllStuff($id);
+
+        $application = new Application();
+        $form = $this->createForm(ApplicationType::class, $application);
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $advert->addApplication($application);
+            $em->persist($application);
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('info', 'Candidature ajoutée!');
+
+            $this->redirectToRoute('ti_platform_view', array(
+                'id' => $advert->getId(),
+            ));
+        }
 
         if (null === $advert) {
             throw new NotFoundHttpException("L'annonce n'existe pas!");
         }
+
         return $this->render('TIPlatformBundle:Advert:view.html.twig', array(
             'advert' => $advert,
+            'form' => $form->createView(),
         ));
     }
 

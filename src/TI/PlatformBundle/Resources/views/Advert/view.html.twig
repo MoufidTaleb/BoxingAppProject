@@ -8,11 +8,20 @@
     {% endfor %}
 
     <h2> {{ advert.title }} </h2>
+    <p>
     Par <em>{{ advert.author }}</em>
     le {{ advert.date|date ('d/m/Y') }} <br/>
+    </p>
+
+    <p>
+    Catégories concernées par l'annonce:
+    {% for categories in advert.weightCategories %}
+        <em>{{ categories.name }}, </em>
+    {% endfor %}
+    </p>
 
     <div class="well">
-        <p><strong> Localisation: </strong> {{ advert.location }} <br/> </p>
+        <p><strong> Localisation: </strong> {{ advert.location }} <br/></p>
         <p> {{ advert.content }} </p></div>
 
     <p>
@@ -28,5 +37,26 @@
             <i class="glyphicon glyphicon-trash"></i>
             Supprimer l'annonce
         </a>
+    <p>
+
     </p>
+
+    </p>
+
+    {{ include("TIPlatformBundle:Application:form.html.twig") }}
+
+
+    <p>
+    Candidatures pour cette annonce:
+    {% for application in advert.applications %}
+        <li>
+            <strong> {{ application.author }} </strong>
+            le {{ application.date|date('d/m/Y') }} <br/>
+            <div class="well"> {{ application.content }} </div>
+        </li>
+    {% endfor %}
+    </p>
+
+
+
 {% endblock %}
