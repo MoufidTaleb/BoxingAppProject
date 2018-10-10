@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 class AdvertType extends AbstractType
 {
     /**
@@ -29,10 +30,9 @@ class AdvertType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => true,
             ))
-            ->add('save', SubmitType::class)
-        ;
+            ->add('save', SubmitType::class);
     }
-    
+
     /**
      * {@inheritdoc}
      */

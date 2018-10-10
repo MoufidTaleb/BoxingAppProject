@@ -145,4 +145,25 @@ class AdvertController extends Controller
             'listAdverts' => $listAdverts,
         ));
     }
+
+    public function deleteApplicationAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $application = $em->getRepository('TIPlatformBundle:Application')->find($id);
+
+        if (null === $application) {
+            throw new NotFoundHttpException("La candidature n'existe pas");
+        }
+
+        $advertId = $application->getAdvert()->getId();
+
+        $em->remove($application);
+        $em->flush();
+
+        $request->getSession()->getFlashBag()->add('info', 'La candidature a bien été supprimée!');
+
+        return $this->redirectToRoute('ti_platform_view', array(
+            'id' => $advertId,
+        ));
+    }
 }

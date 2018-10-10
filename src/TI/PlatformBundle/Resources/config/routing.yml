@@ -31,3 +31,10 @@ ti_platform_delete:
         _controller: TIPlatformBundle:Advert:delete
     requirements:
         id: \d+
+
+ti_platform_application_delete:
+    path:    /delete-application/{id}
+    defaults:
+        _controller: TIPlatformBundle:Advert:deleteApplication
+    requirements:
+        id: \d+

@@ -17,6 +17,7 @@ class Advert
     {
         $this->date = new \DateTime();
         $this->weightCategories = new ArrayCollection();
+        $this->Applications = new ArrayCollection();
     }
 
     /**
@@ -29,7 +30,7 @@ class Advert
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="TI\PlatformBundle\Entity\Application", mappedBy="advert")
+     * @ORM\OneToMany(targetEntity="TI\PlatformBundle\Entity\Application", mappedBy="advert", cascade={"remove"})
      */
     private $applications;
 
