@@ -167,4 +167,20 @@ class Application
     {
         $this->getAdvert()->removeApplication($this);
     }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function increase()
+    {
+        $this->getAdvert()->increaseApplications();
+    }
+
+    /**
+     * @ORM\PreRemove
+     */
+    public function decrease()
+    {
+        $this->getAdvert()->decreaseApplications();
+    }
 }

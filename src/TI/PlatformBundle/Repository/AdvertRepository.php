@@ -41,4 +41,12 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
         ->getSingleResult()
         ;
     }
+
+    public function getNbAdverts()
+    {
+        $query = $this->_em->createQuery('SELECT COUNT(a) FROM TIPlatformBundle:Advert a');
+        $result = $query->getSingleScalarResult();
+
+        return $result;
+    }
 }

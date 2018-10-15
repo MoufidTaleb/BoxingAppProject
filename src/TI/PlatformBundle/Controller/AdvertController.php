@@ -33,10 +33,15 @@ class AdvertController extends Controller
             $this->createNotFoundException("La page " . $page . " n'existe pas!");
         }
 
+        $nbAdverts = $this->getDoctrine()->getManager()
+            ->getRepository('TIPlatformBundle:Advert')
+            ->getNbAdverts();
+
         return $this->render('TIPlatformBundle:Advert:index.html.twig', array(
             'listAdverts' => $listAdverts,
             'nbPages' => $nbPages,
             'page' => $page,
+            'nbAdverts' => $nbAdverts,
         ));
     }
 

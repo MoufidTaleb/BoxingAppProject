@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Advert
- *
  * @ORM\Table(name="advert")
  * @ORM\Entity(repositoryClass="TI\PlatformBundle\Repository\AdvertRepository")
  */
@@ -33,6 +32,11 @@ class Advert
      * @ORM\OneToMany(targetEntity="TI\PlatformBundle\Entity\Application", mappedBy="advert", cascade={"remove"})
      */
     private $applications;
+
+    /**
+     * @ORM\Column(name="nb_applications", type="integer")
+     */
+    private $nbApplications = 0;
 
     /**
      * @var \DateTime
@@ -83,8 +87,6 @@ class Advert
 
 
     //______________________________________________Getters & Setters
-
-
 
 
     /**
@@ -307,5 +309,25 @@ class Advert
     public function getWeightCategories()
     {
         return $this->weightCategories;
+    }
+
+    public function getNbApplications()
+    {
+        return $this->nbApplications;
+    }
+
+    public function setNbApplications($nbApplications)
+    {
+        $this->nbApplications = $nbApplications;
+    }
+
+    public function increaseApplications()
+    {
+        $this->nbApplications++;
+    }
+
+    public function decreaseApplications()
+    {
+        $this->nbApplications--;
     }
 }
