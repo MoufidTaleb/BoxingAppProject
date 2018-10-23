@@ -30,7 +30,7 @@ class AdvertType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => true,
             ))
-            ->add('save', SubmitType::class);
+            ->add('Envoyer', SubmitType::class);
     }
 
     /**

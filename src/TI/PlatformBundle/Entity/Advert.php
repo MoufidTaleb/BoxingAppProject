@@ -4,6 +4,7 @@ namespace TI\PlatformBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Advert
@@ -47,7 +48,7 @@ class Advert
 
     /**
      * @var string
-     *
+     * @Assert\Length(min=8)
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
@@ -61,7 +62,7 @@ class Advert
 
     /**
      * @var string
-     *
+     * @Assert\Length(min=2)
      * @ORM\Column(name="author", type="string", length=255)
      */
     private $author;
@@ -75,7 +76,7 @@ class Advert
 
     /**
      * @var string
-     *
+     * @Assert\Email
      * @ORM\Column(name="email", type="string", length=255, unique=false)
      */
     private $email;
