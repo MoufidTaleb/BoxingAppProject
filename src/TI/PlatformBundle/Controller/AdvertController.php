@@ -10,6 +10,7 @@ use TI\PlatformBundle\Entity\Application;
 use TI\PlatformBundle\Form\AdvertEditType;
 use TI\PlatformBundle\Form\AdvertType;
 use TI\PlatformBundle\Form\ApplicationType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class AdvertController extends Controller
 {
@@ -95,6 +96,9 @@ class AdvertController extends Controller
         ));
     }
 
+    /**
+     * @Security("has_role('ROLE_ADMIN')")
+     */
     public function editAction(Request $request, $id)
     {
         $advert = $this->getDoctrine()->getManager()->getRepository('TIPlatformBundle:Advert')->find($id);
@@ -120,6 +124,9 @@ class AdvertController extends Controller
         ));
     }
 
+    /**
+     * @Security("has_role('ROLE_ADMIN')")
+     */
     public function deleteAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -151,6 +158,9 @@ class AdvertController extends Controller
         ));
     }
 
+    /**
+     * @Security("has_role('ROLE_ADMIN')")
+     */
     public function deleteApplicationAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();

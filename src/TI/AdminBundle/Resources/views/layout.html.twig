@@ -1,0 +1,26 @@
+{% extends "TICoreBundle::layout.html.twig" %}
+
+{% block title %}
+    Panneau d'administration - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    <h1> Panneau d'administration </h1>
+
+    <hr>
+
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        Connecté en tant que {{ app.user.username }}
+        -
+        <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+    {% else %}
+        <a href="{{ path('fos_user_security_login') }}">Connexion</a>
+    {% endif %}
+
+    <hr>
+
+    {% block adminBody %}
+    {% endblock %}
+
+{% endblock %}

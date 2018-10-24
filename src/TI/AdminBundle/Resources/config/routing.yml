@@ -1,0 +1,10 @@
+ti_admin_index:
+    path:     /
+    defaults: { _controller: TIAdminBundle:Admin:index }
+
+ti_admin_editUser:
+    path: /{id}
+    defaults:
+        _controller: TIAdminBundle:Admin:editUser
+    requirements:
+        id: \d+

@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new TI\CoreBundle\TICoreBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new TI\UserBundle\TIUserBundle(),
+            new TI\AdminBundle\TIAdminBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

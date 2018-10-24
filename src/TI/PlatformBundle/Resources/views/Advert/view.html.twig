@@ -9,15 +9,15 @@
 
     <h2> {{ advert.title }} </h2>
     <p>
-    Par <em>{{ advert.author }}</em>
-    le {{ advert.date|date ('d/m/Y') }} <br/>
+        Par <em>{{ advert.author }}</em>
+        le {{ advert.date|date ('d/m/Y') }} <br/>
     </p>
 
     <p>
-    Catégories concernées par l'annonce:
-    {% for categories in advert.weightCategories %}
-        <em>{{ categories.name }}, </em>
-    {% endfor %}
+        Catégories concernées par l'annonce:
+        {% for categories in advert.weightCategories %}
+            <em>{{ categories.name }}, </em>
+        {% endfor %}
     </p>
 
     <div class="well">
@@ -29,14 +29,16 @@
             <i class="glyphicon glyphicon-chevron-left"></i>
             Retour à la liste
         </a>
-        <a href="{{ path('ti_platform_edit', {'id': advert.id }) }}" class="btn btn-default">
-            <i class="glyphicon glyphicon-edit"></i>
-            Modifier l'annonce
-        </a>
-        <a href="{{ path('ti_platform_delete', { 'id' : advert.id }) }}" class="btn btn-danger">
-            <i class="glyphicon glyphicon-trash"></i>
-            Supprimer l'annonce
-        </a>
+        {% if is_granted ('ROLE_ADMIN') %}
+            <a href="{{ path('ti_platform_edit', {'id': advert.id }) }}" class="btn btn-default">
+                <i class="glyphicon glyphicon-edit"></i>
+                Modifier l'annonce
+            </a>
+            <a href="{{ path('ti_platform_delete', { 'id' : advert.id }) }}" class="btn btn-danger">
+                <i class="glyphicon glyphicon-trash"></i>
+                Supprimer l'annonce
+            </a>
+        {% endif %}
     <p>
 
     </p>
