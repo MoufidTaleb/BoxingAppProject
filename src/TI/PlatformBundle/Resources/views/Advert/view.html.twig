@@ -55,10 +55,12 @@
             <strong> {{ application.author }} </strong>
             le {{ application.date|date('d/m/Y') }} <br/>
             <div class="well"> {{ application.content }} </div>
+            {% if is_granted ('ROLE_ADMIN') %}
             <a href="{{ path('ti_platform_application_delete',{'id' : application.id}) }}" class="btn btn-danger">
                 <i class="glyphicon glyphicon-trash"></i>
                 Supprimer
             </a>
+            {% endif %}
         </li> <br/>
     {% endfor %}
     </p>

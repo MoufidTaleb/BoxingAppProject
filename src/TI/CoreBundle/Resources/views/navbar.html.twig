@@ -1,0 +1,32 @@
+<div class="container">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">The Boxer's Corner</a>
+        </div>
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li><a href="{{ path('ti_platform_home') }}">Accueil</a></li>
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    <li><a href="#"> Mon profil: {{ app.user.username }} </a></li>
+                    <li><a href="{{ path('ti_platform_add') }}">Ajouter une annonce</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+                    </li>
+                {% else %}
+                    <li><a href="{{ path('fos_user_registration_register') }}">Inscription</a></li>
+                    <li><a href="{{ path('fos_user_security_login') }}">Connexion</a></li>
+                {% endif %}
+
+            </ul>
+            <form class="navbar-form navbar-right inline-form">
+                <div class="form-group">
+                    <input type="search" class="input-sm form-control" placeholder="Recherche">
+                    <button type="submit" class="btn btn-primary btn-sm"><span
+                                class="glyphicon glyphicon-eye-open"></span> Chercher
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </nav>
+</div>
