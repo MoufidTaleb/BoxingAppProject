@@ -29,6 +29,17 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
+    app.form.profile:
+        class: TI\UserBundle\Form\UserType
+        tags:
+            - {name: form.type, alias: ti_userbundle_user }
+    app.form.registration:
+        class: TI\UserBundle\Form\RegistrationType
+        tags:
+        - {name: form.type, alias: ti_userbundle_user }
+
+
+
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:
     #     arguments:

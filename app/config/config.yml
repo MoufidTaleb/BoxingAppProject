@@ -78,3 +78,9 @@ fos_user:
     from_email:
         address: "moufid.taleb@gmail.com"
         sender_name: "moufid"
+    profile:
+        form:
+            type: TI\UserBundle\Form\UserType
+    registration:
+        form:
+            type: TI\UserBundle\Form\RegistrationType

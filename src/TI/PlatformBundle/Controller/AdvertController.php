@@ -77,6 +77,11 @@ class AdvertController extends Controller
         ));
     }
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
+     */
     public function addAction(Request $request)
     {
         $advert = new Advert();

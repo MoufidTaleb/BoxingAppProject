@@ -1,0 +1,11 @@
+{% extends "TIAdminBundle::layout.html.twig" %}
+
+{% block adminBody %}
+    <h2>{{  user.username }}  <br/> </h2>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <div>
+        <input type="submit" value="Valider" />
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

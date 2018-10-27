@@ -6,7 +6,8 @@ namespace TI\AdminBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use TI\UserBundle\Form\UserType;
+use TI\UserBundle\Form\UserEditByAdminType;
+
 
 class AdminController extends Controller
 {
@@ -31,7 +32,7 @@ class AdminController extends Controller
             throw new NotFoundHttpException("L'utilisateur n'existe pas!");
         }
 
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserEditByAdminType::class, $user);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
         {
@@ -43,7 +44,7 @@ class AdminController extends Controller
                 'id' => $id,
             ));
         }
-        return $this->render('TIAdminBundle:Admin:viewUser.html.twig', array(
+        return $this->render('TIAdminBundle:Admin:editUser.html.twig', array(
            'user' => $user,
             'form' => $form->createView(),
         ));
