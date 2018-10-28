@@ -1,21 +1,32 @@
 {% extends "TIAdminBundle::layout.html.twig" %}
 
 {% block adminBody %}
-    {% for user in listUsers %}
-        <div class="well">
-            Nom:
-            <a href="{{ path('ti_admin_editUser', {'id': user.id }) }}">
-                {{ user.username }}
-            </a> <br/>
-            Email: {{ user.email }} <br/>
-            Roles:
-            {% for role in user.roles %}
-                {{ role }},
-            {% endfor %} <br/>
-            {# Connecté pour la dernière fois le: {{ user.last_login }} #}
-            <a href="#"> Promouvoir Administrateur </a>
-
-        </div>
-
-    {% endfor %}
+    <div class="container">
+        <h2>Liste des Utilisateurs</h2>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Pseudo</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td><a href="{{ path('ti_admin_editUser', {'id': user.id }) }}">
+                            {{ user.username }}
+                        </a>
+                    </td>
+                    <td>{{ user.email }}</td>
+                    <td>{% for role in user.roles %}
+                            {{ role }},
+                        {% endfor %}</td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

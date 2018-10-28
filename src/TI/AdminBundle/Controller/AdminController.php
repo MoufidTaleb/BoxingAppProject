@@ -14,10 +14,10 @@ class AdminController extends Controller
     public function indexAction()
     {
         $userManager = $this->get('fos_user.user_manager');
-        $listUsers = $userManager->findUsers();
+        $users = $userManager->findUsers();
 
         return $this->render('TIAdminBundle:Admin:index.html.twig', array(
-            'listUsers' => $listUsers,
+            'users' => $users,
         ));
     }
 
