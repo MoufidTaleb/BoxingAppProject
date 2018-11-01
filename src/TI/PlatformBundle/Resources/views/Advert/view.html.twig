@@ -9,7 +9,7 @@
 
     <h2> {{ advert.title }} </h2>
     <p>
-        Par <em>{{ advert.author }}</em>
+        Par <em>{{ advert.user.username }}</em>
         le {{ advert.date|date ('d/m/Y') }} <br/>
     </p>
 

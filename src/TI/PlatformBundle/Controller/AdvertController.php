@@ -85,9 +85,13 @@ class AdvertController extends Controller
     public function addAction(Request $request)
     {
         $advert = new Advert();
+        $user = $this->getUser();
+
+
         $form = $this->createForm(AdvertType::class, $advert);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $advert->setUser($user);
             $em = $this->getDoctrine()->getManager();
             $em->persist($advert);
             $em->flush();

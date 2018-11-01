@@ -22,7 +22,6 @@ class AdvertType extends AbstractType
         $builder->add('date', DateTimeType::class)
             ->add('title', TextType::class)
             ->add('location', TextType::class)
-            ->add('author', TextType::class)
             ->add('content', TextareaType::class)
             ->add('email', EmailType::class)
             ->add('weightCategories', EntityType::class, array(

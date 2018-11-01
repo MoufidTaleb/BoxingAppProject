@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Advert
  * @ORM\Table(name="advert")
  * @ORM\Entity(repositoryClass="TI\PlatformBundle\Repository\AdvertRepository")
+ *
  */
 class Advert
 {
@@ -17,7 +18,7 @@ class Advert
     {
         $this->date = new \DateTime();
         $this->weightCategories = new ArrayCollection();
-        $this->Applications = new ArrayCollection();
+        $this->applications = new ArrayCollection();
     }
 
     /**
@@ -33,6 +34,12 @@ class Advert
      * @ORM\OneToMany(targetEntity="TI\PlatformBundle\Entity\Application", mappedBy="advert", cascade={"remove"})
      */
     private $applications;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="TI\UserBundle\Entity\User", inversedBy="adverts")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     /**
      * @ORM\Column(name="nb_applications", type="integer")
@@ -59,13 +66,6 @@ class Advert
      * @ORM\Column(name="location", type="string", length=255)
      */
     private $location;
-
-    /**
-     * @var string
-     * @Assert\Length(min=2)
-     * @ORM\Column(name="author", type="string", length=255)
-     */
-    private $author;
 
     /**
      * @var string
@@ -330,5 +330,29 @@ class Advert
     public function decreaseApplications()
     {
         $this->nbApplications--;
+    }
+
+    /**
+     * Set user.
+     *
+     * @param \TI\UserBundle\Entity\User $user
+     *
+     * @return Advert
+     */
+    public function setUser(\TI\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user.
+     *
+     * @return \TI\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

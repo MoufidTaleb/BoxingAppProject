@@ -28,6 +28,11 @@ class User extends BaseUser
     private $weightCategories;
 
     /**
+     * @ORM\OneToMany(targetEntity="TI\PlatformBundle\Entity\Advert", mappedBy="user")
+     */
+    private $adverts;
+
+    /**
      * @var string
      * @ORM\Column(name="location", type="string", length=255, nullable=true)
      */
@@ -91,5 +96,41 @@ class User extends BaseUser
     public function getWeightCategories()
     {
         return $this->weightCategories;
+    }
+
+    /**
+     * Add advert.
+     *
+     * @param \TI\PlatformBundle\Entity\Advert $advert
+     *
+     * @return User
+     */
+    public function addAdvert(\TI\PlatformBundle\Entity\Advert $advert)
+    {
+        $this->adverts[] = $advert;
+
+        return $this;
+    }
+
+    /**
+     * Remove advert.
+     *
+     * @param \TI\PlatformBundle\Entity\Advert $advert
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeAdvert(\TI\PlatformBundle\Entity\Advert $advert)
+    {
+        return $this->adverts->removeElement($advert);
+    }
+
+    /**
+     * Get adverts.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAdverts()
+    {
+        return $this->adverts;
     }
 }
