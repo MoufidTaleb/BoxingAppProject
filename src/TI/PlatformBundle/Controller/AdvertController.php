@@ -46,6 +46,12 @@ class AdvertController extends Controller
         ));
     }
 
+    /**
+     * MethodInfos(description = 'Used to view an Advert, or add an application')
+     * @param Request $request
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function viewAction(Request $request, $id)
     {
         $repository = $this->getDoctrine()->getManager()->getRepository('TIPlatformBundle:Advert');
@@ -55,6 +61,7 @@ class AdvertController extends Controller
         $form = $this->createForm(ApplicationType::class, $application);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $application->setUser($this->getUser());
             $em = $this->getDoctrine()->getManager();
             $advert->addApplication($application);
             $em->persist($application);

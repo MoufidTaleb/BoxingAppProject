@@ -149,30 +149,6 @@ class Advert
     }
 
     /**
-     * Set author
-     *
-     * @param string $author
-     *
-     * @return Advert
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return string
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
-
-    /**
      * Set content
      *
      * @param string $content

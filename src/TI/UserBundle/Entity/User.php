@@ -28,9 +28,14 @@ class User extends BaseUser
     private $weightCategories;
 
     /**
-     * @ORM\OneToMany(targetEntity="TI\PlatformBundle\Entity\Advert", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="TI\PlatformBundle\Entity\Advert", cascade={"remove"}, mappedBy="user")
      */
     private $adverts;
+
+    /**
+     * @ORM\OneToMany(targetEntity="TI\PlatformBundle\Entity\Application", cascade={"remove"}, mappedBy="user")
+     */
+    private $applications;
 
     /**
      * @var string
@@ -132,5 +137,41 @@ class User extends BaseUser
     public function getAdverts()
     {
         return $this->adverts;
+    }
+
+    /**
+     * Add application.
+     *
+     * @param \TI\PlatformBundle\Entity\Application $application
+     *
+     * @return User
+     */
+    public function addApplication(\TI\PlatformBundle\Entity\Application $application)
+    {
+        $this->applications[] = $application;
+
+        return $this;
+    }
+
+    /**
+     * Remove application.
+     *
+     * @param \TI\PlatformBundle\Entity\Application $application
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeApplication(\TI\PlatformBundle\Entity\Application $application)
+    {
+        return $this->applications->removeElement($application);
+    }
+
+    /**
+     * Get applications.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getApplications()
+    {
+        return $this->applications;
     }
 }

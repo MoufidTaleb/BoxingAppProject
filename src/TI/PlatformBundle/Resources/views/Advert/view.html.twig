@@ -52,7 +52,7 @@
     Candidatures pour cette annonce ({{ advert.nbApplications }}):
     {% for application in advert.applications %}
         <li>
-            <strong> {{ application.author }} </strong>
+            <strong> {{ application.user.username }} </strong>
             le {{ application.date|date('d/m/Y') }} <br/>
             <div class="well"> {{ application.content }} </div>
             {% if is_granted ('ROLE_ADMIN') %}

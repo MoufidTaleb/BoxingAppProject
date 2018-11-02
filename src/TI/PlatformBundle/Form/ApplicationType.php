@@ -17,7 +17,7 @@ class ApplicationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('author', TextType::class)
+        $builder
             ->add('content', TextareaType::class)
             ->add('Envoyer', SubmitType::class)
             ;

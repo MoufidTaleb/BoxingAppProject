@@ -28,11 +28,10 @@ class Application
     }
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="author", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="TI\UserBundle\Entity\User", inversedBy="applications"))
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $author;
+    private $user;
 
     /**
      * @var string
@@ -62,30 +61,6 @@ class Application
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set author
-     *
-     * @param string $author
-     *
-     * @return Application
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return string
-     */
-    public function getAuthor()
-    {
-        return $this->author;
     }
 
     /**
@@ -182,5 +157,29 @@ class Application
     public function decrease()
     {
         $this->getAdvert()->decreaseApplications();
+    }
+
+    /**
+     * Set user.
+     *
+     * @param \TI\UserBundle\Entity\User $user
+     *
+     * @return Application
+     */
+    public function setUser(\TI\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user.
+     *
+     * @return \TI\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
