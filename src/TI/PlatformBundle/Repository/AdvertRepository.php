@@ -14,32 +14,30 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
 {
     public function getAdverts($page, $nbPerPage) //With a paginator
     {
-    $query = $this->createQueryBuilder('a')
-        ->orderBy('a.date', 'DESC')
-        ->getQuery();
+        $query = $this->createQueryBuilder('a')
+            ->orderBy('a.date', 'DESC')
+            ->getQuery();
 
-    $query
-        ->setFirstResult(($page-1) * $nbPerPage)
-        ->setMaxResults($nbPerPage);
+        $query
+            ->setFirstResult(($page - 1) * $nbPerPage)
+            ->setMaxResults($nbPerPage);
 
-    return new Paginator($query, false);
+        return new Paginator($query, false);
     }
 
     public function getAdvertWithAllStuff($id)
     {
-    $qb = $this->createQueryBuilder('a')
-        ->where('a.id = :id')
-        ->setParameter('id', $id)
-        ->leftJoin('a.applications', 'app')
-        ->addSelect('app')
-        ->leftJoin('a.weightCategories', 'wc')
-        ->addSelect('wc')
-        ->orderBy('a.date', 'DESC')
-        ;
-    return $qb
-        ->getQuery()
-        ->getSingleResult()
-        ;
+        $qb = $this->createQueryBuilder('a')
+            ->where('a.id = :id')
+            ->setParameter('id', $id)
+            ->leftJoin('a.applications', 'app')
+            ->addSelect('app')
+            ->leftJoin('a.weightCategories', 'wc')
+            ->addSelect('wc')
+            ->orderBy('a.date', 'DESC');
+        return $qb
+            ->getQuery()
+            ->getSingleResult();
     }
 
     public function getNbAdverts()
@@ -48,5 +46,19 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
         $result = $query->getSingleScalarResult();
 
         return $result;
+    }
+
+    public function getPaginatedAdvertsByUser($user, $nbPerPage, $page)
+    {
+        $query = $this->_em->createQuery('SELECT a FROM TIPlatformBundle:Advert a WHERE a.user = :user ORDER BY a.date DESC')
+            ->setParameter('user', $user)
+            ;
+
+        $query
+            ->setFirstResult(($page - 1) * $nbPerPage)
+            ->setMaxResults($nbPerPage);
+
+        return new Paginator($query, false);
+
     }
 }
