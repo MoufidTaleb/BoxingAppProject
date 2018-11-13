@@ -6,6 +6,10 @@ ti_core:
     resource: "@TICoreBundle/Resources/config/routing.yml"
     prefix:   /
 
+ti_user:
+    resource: "@TIUserBundle/Resources/config/routing.yml"
+    prefix:   /user
+
 ti_platform:
     resource: "@TIPlatformBundle/Resources/config/routing.yml"
     prefix:   /platform

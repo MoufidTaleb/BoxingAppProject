@@ -1,0 +1,9 @@
+ti_user_public_view:
+    path:     /{id}/{page}
+    defaults:
+        _controller: TIUserBundle:PublicProfile:publicShow
+        page: 1
+    requirements:
+        id: \d+
+        page: \d*
+

@@ -19,6 +19,10 @@ class ProfileController extends BaseController
 
         $nbPages = ceil(count($userLastAdverts) / $nbPerPage);
 
+        if($page > $nbPages){
+            $this->createNotFoundException("La page".$page."n'existe pas!");
+        } //TODO Make this working
+
         return $this->render('@FOSUser/Profile/show.html.twig', array(
             'user' => $user,
             'userLastAdverts' => $userLastAdverts,

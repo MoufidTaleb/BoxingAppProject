@@ -32,7 +32,7 @@ class AdvertController extends Controller
 
         if ($page > $nbPages) {
             $this->createNotFoundException("La page " . $page . " n'existe pas!");
-        }
+        } //TODO Make this working
 
         $nbAdverts = $this->getDoctrine()->getManager()
             ->getRepository('TIPlatformBundle:Advert')

@@ -15,7 +15,8 @@
         {% for advert in listAdverts %}
             <li>
                 <a href="{{ path('ti_platform_view', {'id': advert.id}) }} "> {{ advert.title }}</a>
-                par <i>{{ advert.user.username }}</i> le {{ advert.date|date('d/m/Y') }}
+                par <i><a href="{{ path('ti_user_public_view', {'id': advert.user.id, 'page': 1}) }}">{{ advert.user.username }}</a></i>
+                le {{ advert.date|date('d/m/Y') }}
             </li>
 
         {% else %}
