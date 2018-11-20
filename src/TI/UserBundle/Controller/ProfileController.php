@@ -4,6 +4,7 @@ namespace TI\UserBundle\Controller;
 
 use FOS\UserBundle\Controller\ProfileController as BaseController;
 use FOS\UserBundle\Model\UserInterface;
+
 class ProfileController extends BaseController
 {
     public function showAction($page)

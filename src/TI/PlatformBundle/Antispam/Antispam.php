@@ -9,7 +9,7 @@ class Antispam
 
     public function __construct($minLength)
     {
-        $this->minLength = (int) $mingLength;
+        $this->minLength = (int) $minLength;
     }
 
     /**
