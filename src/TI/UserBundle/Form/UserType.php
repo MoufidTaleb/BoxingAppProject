@@ -21,6 +21,7 @@ class UserType extends AbstractType
                     'class' => 'TIPlatformBundle:WeightCategory',
                     'choice_label' => 'name',
                     'multiple' => true,
+                    'expanded' => true,
                 ))
                 //->add('Modifier', SubmitType::class)
         ;

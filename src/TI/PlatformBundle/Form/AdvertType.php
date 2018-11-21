@@ -28,6 +28,7 @@ class AdvertType extends AbstractType
                 'class' => 'TIPlatformBundle:WeightCategory',
                 'choice_label' => 'name',
                 'multiple' => true,
+                'expanded' => true,
             ))
             ->add('Envoyer', SubmitType::class);
     }

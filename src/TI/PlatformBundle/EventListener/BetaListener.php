@@ -6,6 +6,11 @@ use Symfony\Component\HttpFoundation\Response;
 use TI\PlatformBundle\Beta\BetaHTMLAdder;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
+/**
+ * Class BetaListener
+ * @package TI\PlatformBundle\EventListener
+ * A listener, made for executing the BetaHTMLAdder service, he's configured in the services.yml file of Symfony
+ */
 class BetaListener
 {
     protected $betaHTML;

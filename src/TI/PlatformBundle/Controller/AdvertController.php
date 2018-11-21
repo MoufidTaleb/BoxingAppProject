@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use TI\PlatformBundle\Entity\Advert;
 use TI\PlatformBundle\Entity\Application;
+use TI\PlatformBundle\Event\MessagePostEvent;
 use TI\PlatformBundle\Form\AdvertEditType;
 use TI\PlatformBundle\Form\AdvertType;
 use TI\PlatformBundle\Form\ApplicationType;
@@ -94,11 +95,18 @@ class AdvertController extends Controller
         $advert = new Advert();
         $user = $this->getUser();
 
-
         $form = $this->createForm(AdvertType::class, $advert);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             $advert->setUser($user);
+
+            //TODO Implement a new message notifier
+            /*
+            $event = new MessagePostEvent($advert->getContent(), $advert->getUser());
+            $this->get('event_dispatcher')->dispatch(PlatformEvents::POST_MESSAGE, $event);
+            $advert->setContent($event->getMessage());
+            */
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($advert);
             $em->flush();
